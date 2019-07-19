@@ -14,6 +14,11 @@ class App extends Component {
   }
 
   getCharacters = URL => {
+    // axios.get(URL)
+    // .then(data => {
+    //   console.log(data);
+    //   this.setState({ people: data.results });
+    // });
     fetch(URL)
     .then(res => {
       return res.json();

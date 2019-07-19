@@ -3,6 +3,7 @@ import "./StarWars.css";
 import Individual from "./Individual";
 
 const Characters = props => {
+console.log(props);
     return(
         <div className="container">
             <ul>
