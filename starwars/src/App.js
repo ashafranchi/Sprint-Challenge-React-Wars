@@ -1,19 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import Characters from "./components/Characters";
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      people: []
+    };
+  }
+  componentDidMount() {
+    this.getCharacters("https://swapi.co/api/people/")
+  }
 
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
-
-  return (
-    <div className="App">
-      <h1 className="Header">React Wars</h1>
-    </div>
-  );
+  getCharacters = URL => {
+    // axios.get(URL)
+    // .then(data => {
+    //   console.log(data);
+    //   this.setState({ people: data.results });
+    // });
+    fetch(URL)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      this.setState({ people: data.results });
+    });
+  };
+  render() {
+    return (
+      <div className="App">
+        <h1 className="Header">React Wars</h1>
+        <Characters characters={this.state.people}/>
+      </div>
+    );
+  }
 }
+
 
 export default App;
