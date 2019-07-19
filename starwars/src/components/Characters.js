@@ -1,29 +1,15 @@
-import React from "react";
-import Individual from "./Individual"
+import React, {useState, useEffect} from "react";
+import "./StarWars.css";
+import Individual from "./Individual";
 
-function Characters() {
-
-const [charactersData, setcharactersData] = useState ();
-
-useEffect(() => {
-    this.getCharacters("https://swapi.co/api/people/1/")
-    .then(res => {
-        setcharactersData(res.data.results)
-    })
-    .catch(err => console.log(err));
-}, [])
-
-console.log(charactersData)
-
-if (!charactersData) {
-    return <h1>Loading...</h1>
-}else {
+const Characters = props => {
     return(
-        <div>
-            {charactersData.map((person, index) => <Individual person={person} key={index} />)}
+        <div className="container">
+            <ul>
+                {props.characters.map((props) => <Individual key={props.created} name={props.name} gender={props.gender}/>)}
+            </ul>
         </div>
-    );
-}
-}
+    )
+    }
 
 export default Characters
